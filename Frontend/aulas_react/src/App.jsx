@@ -7,6 +7,7 @@ import Inicio from './pages/inicio';
 import Detalhes from './pages/detalhes';
 import Contato from './pages/contato';
 import Filme from './pages/filmes';
+import Aula15_login from './components/Aula15_login';
 
 function app (){
 return(
@@ -14,6 +15,7 @@ return(
         <Routes>
             <Route path="/" element={<Principal />} />
             <Route path="/sobre" element={<Sobre />} />
+            <Route path="/Aula15_Login" element={<Aula15_login />} />
             <Route path="/perfil/:nome" element={<Perfil />} />
             <Route path="/inicio" element={<Inicio />} />
             <Route path="/detalhes" element={<Detalhes />} />
