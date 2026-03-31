@@ -24,7 +24,7 @@ const Aula14 = () => {
             <button onClick={() => navigate('/perfil/Barreto')}>Perfil do Barreto</button>
             <hr />
             <button onClick={() => navigate('/inicio')}>Início</button>
-            <button onClick={() => navigate('/inicio')}>Início</button>
+            <button onClick={() => navigate('/Aula15_login')}>Login</button>
             <button onClick={() => navigate('/filme/O Poderoso Chefão')}>Filme: O Poderoso Chefão</button>
 
 

@@ -1,7 +1,7 @@
 const documentacao = {
     openapi: '3.0.3',
     info:{
-        title: 'API FinanControl',
+        title: 'API Controle de Finanças - FinanControl',
         description: 'Documentação da API do sistema FinanControl',
         version: '1.0.0'
     },
@@ -10,6 +10,7 @@ const documentacao = {
     ],
     tags: [
         {name: 'Usuários', description: 'Operações relacionadas aos usuários'},
+        {name: 'Categorias', description: 'Operações relacionadas às categorias'},
     ],
     paths: {
         "/usuarios": {
@@ -173,7 +174,234 @@ const documentacao = {
                 }
             }
         },
-        
+        "/categorias": {
+            get: {
+                tags:["Categorias"],
+                summary: "Listar todas as categorias",
+                responses: {
+                    200:{
+                        description: "Dados obtidos com sucesso!",
+                        content: {
+                            "apllication/json":{
+                                schema:{
+                                    type: "array",
+                                    items: {$ref: '#/components/schemas/Listar_Categorias'}
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+             post: {
+                tags:['Categorias'],
+                summary: 'Cadastrar nova categoria',
+                description: "Recebe nome, descrição, cor, ícone e tipo para cadastrar nova categoria",
+                requestBody: {
+                    required: true,
+                    content: {
+                        "application/json":{
+                            schema: {
+                                $ref: "#/components/schemas/Cadastrar_Categoria"
+                            }
+                        }
+                    }
+                },
+                responses: {
+                    201: {
+                        description: "Categoria cadastrada com sucesso!"
+                    },
+                    500: {
+                        description: "Erro interno no servidor"
+                    }
+                }
+            }
+        },
+        "/categorias/{id_categoria}": {
+            put:{
+                tags: ['Categorias'],
+                summary: 'Atualizar todos os dados da categoria',
+                description: 'Atualiza todos os dados de uma categoria existente, é necessário enviar todos os campos',
+                parameters: [
+                    {
+                        name: "id_categoria",
+                        in: "path",
+                        description: "ID da categoria a ser atualizada",
+                        required: true,
+                        schema: {
+                            type: "integer"
+                        }
+                    }
+                ],
+                requestBody: {
+                    required: true,
+                    content: {
+                        "application/json": {
+                            schema: {
+                                $ref: "#/components/schemas/Atualizar_Categoria"
+                            }
+                        }
+                    }
+                },
+                responses: {
+                    200: {
+                        description: "Categoria atualizada com sucesso!"
+                    },
+                    404: {
+                        description: "Categoria não encontrada"
+                    },
+                    500: {
+                        description: "Erro interno no servidor"
+                    }
+                }
+            },
+            delete: {
+                tags: ['Categorias'],
+                summary: 'Remover Categoria',
+                description: 'Remove categoria existente pelo ID',
+                parameters: [
+                    {
+                        name: "id_categoria",
+                        in: "path",
+                        required: true,
+                        description: "ID da categoria a ser removida",
+                        schema: {
+                            type: 'integer',
+                            example: 1
+                        }
+                    }
+                ],
+                responses: {
+                    200: {
+                        description: "Categoria removida com sucesso!"
+                    },
+                    404: { 
+                        description: "Categoria não encontrada",
+                        content: {
+                            "application/json":{
+                                example: {message: "Categoria não encontrada"}
+                            }
+                        }
+                    },
+                    500: {
+                        description: "Erro interno no servidor"
+                    }
+                }
+            }
+        },
+        "/subcategorias": {
+            get: {
+                tags:["Subcategorias"],
+                summary: "Listar todas as subcategorias",
+                responses: {
+                    200:{
+                        description: "Dados obtidos com sucesso!",
+                        content: {
+                            "apllication/json":{
+                                schema:{
+                                    type: "array",
+                                    items: {$ref: '#/components/schemas/Listar_Subcategorias'}
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            post: {
+                tags:['Subcategorias'],
+                summary: 'Cadastrar nova subcategoria',
+                description: "Recebe nome, descrição, cor, ícone e tipo para cadastrar nova subcategoria",
+                requestBody: {
+                    required: true,
+                    content: {
+                        "application/json":{
+                            schema: {
+                                $ref: "#/components/schemas/Cadastrar_Subcategoria"
+                            }
+                        }
+                    }
+                },
+                responses: {
+                    201: {
+                        description: "Subcategoria cadastrada com sucesso!"
+                    },
+                    500: {
+                        description: "Erro interno no servidor"
+                    }
+                }
+            }
+        },
+        "/subcategorias/{id_subcategoria}": {
+             put:{
+                tags: ['Subcategorias'],
+                summary: 'Atualizar todos os dados da subcategoria',
+                description: 'Atualiza todos os dados de uma subcategoria existente, é necessário enviar todos os campos',
+                parameters: [
+                    {
+                        name: "id_subcategoria",
+                        in: "path",
+                        description: "ID da subcategoria a ser atualizada",
+                        required: true,
+                        schema: {
+                            type: "integer"
+                        }
+                    }
+                ],
+                requestBody: {
+                    required: true,
+                    content: {
+                        "application/json": {
+                            schema: {
+                                $ref: "#/components/schemas/Atualizar_Subcategoria"
+                            }
+                        }
+                    }
+                },
+                responses: {
+                    200: {
+                        description: "Subcategoria atualizada com sucesso!"
+                    },
+                    404: {
+                        description: "Subcategoria não encontrada"
+                    },
+                    500: {
+                        description: "Erro interno no servidor"
+                    }
+                }
+            },
+            delete: {
+                tags: ['Subcategorias'],
+                summary: 'Remover Subcategoria',
+                description: 'Remove subcategoria existente pelo ID',
+                parameters: [
+                    {
+                        name: "id_subcategoria",
+                        in: "path",
+                        required: true,
+                        description: "ID da subcategoria a ser removida",
+                        schema: {
+                            type: 'integer',
+                            example: 1
+                        }
+                    }
+                ],
+                responses: {
+                    200: {
+                        description: "Subcategoria removida com sucesso!"
+                    },
+                    404: { 
+                        description: "Subcategoria não encontrada",
+                        content: {
+                            "application/json":{
+                                example: {message: "Subcategoria não encontrada"}
+                            }
+                        }
+                    },
+                    500: {
+                        description: "Erro interno no servidor"
+                    }
+                }
+            }
+        },
     },
     components:{
         schemas:{
@@ -185,12 +413,51 @@ const documentacao = {
                     email: {type: "string", example: "ricardo@email.com"}
                 }
             },
+            Listar_Categorias:{
+                type: 'object',
+                properties: {
+                    id_categoria: {type: "integer", example: 1},
+                    nome: {type: "string", example: "Eletrônicos"},
+                    descricao: {type: "string", example: "Produtos eletrônicos"},
+                    cor: {type: "string", example: "#FF0000"},
+                    icone: {type: "string", example: "caminhodoicone"},
+                    tipo: {type: "string", example: "E"}
+                }
+            },
+             Listar_Subcategorias:{
+                type: 'object',
+                properties: {
+                    id_subcategoria: {type: "integer", example: 1},
+                    nome: {type: "string", example: "Smartphones"},
+                    ativo: {type: "boolean", example: true},
+                    id_categoria: {type: "integer", example: 1}
+                }
+            },
             Cadastrar_Usuario: {
                 type: 'object',
                 properties: {
                     nome: {type: "string", example: "Ricardo"},
                     email: {type: "string", example: "ricardo2@email.com"},
-                    senha: {type: "string", example: "Senha123"}
+                    senha: {type: "string", example: "Senha123"},
+                    tipo_acesso: {type: "string", example: "admin"}
+                }
+            },
+            Cadastrar_Categoria: {
+                type: 'object',
+                properties: {
+                    nome: {type: "string", example: "Eletrônicos"},
+                    descricao: {type: "string", example: "Descrição da categoria"},
+                    cor: {type: "string", example: "#FF0000"},
+                    icone: {type: "string", example: "caminhodoicone"},
+                    tipo: {type: "string", example: "E"}
+                }
+            },
+            Cadastrar_Subcategoria: {
+                type: 'object',
+                properties: {
+                    nome: {type: "string", example: "Smartphones"},
+                    ativo: {type: "boolean", example: true},
+                    id_categoria: {type: "integer", example: 1}
                 }
             },
             Atualizar_Usuario: {
@@ -199,7 +466,30 @@ const documentacao = {
                 properties: {
                     nome: {type: "string", example: "Nina"},
                     email: {type: "string", example: "nina@email.com"},
-                    senha: {type: "string", example: "Senha123"}
+                    senha: {type: "string", example: "Senha123"},
+                    tipo_acesso: {type: "string", example: "admin"}
+
+                }
+            },
+            Atualizar_Categoria: {
+                type: 'object',
+                required: ["nome", "descricao", "cor", "icone", "tipo"],
+                properties: {
+                    nome: {type: "string", example: "Nina"},
+                    descricao: {type: "string", example: "Descrição da categoria"},
+                    cor: {type: "string", example: "#FF0000"},
+                    icone: {type: "string", example: "caminhodoicone"},
+                    tipo: {type: "string", example: "E"}
+                }
+                
+            },
+             Atualizar_Subcategoria: {
+                type: 'object',
+                required: ["nome", "ativo", "id_categoria"],
+                properties: {
+                    nome: {type: "string", example: "Nina"},
+                    ativo: {type: "boolean", example: true},
+                    id_categoria: {type: "integer", example: 1}
                 }
             },
             Login_Usuario : {
