@@ -1,7 +1,7 @@
 const documentacao = {
     openapi: '3.0.3',
-    info: {
-        title: 'API de Controle Financeiro - FinanControl',
+    info:{
+        title: 'API FinanControl',
         description: 'Documentação da API do sistema FinanControl',
         version: '1.0.0'
     },
@@ -9,8 +9,7 @@ const documentacao = {
         { url: 'http://localhost:3000', description: 'localhost' }
     ],
     tags: [
-        { name: 'Usuários', description: 'Operações relacionadas aos usuários' },
-        { name: 'Categorias', description: 'Operações relacionadas as Categorias' }
+        {name: 'Usuários', description: 'Operações relacionadas aos usuários'},
     ],
     paths: {
         "/usuarios": {
@@ -668,6 +667,7 @@ const documentacao = {
                 }
             }
         },
+        
     },
     components: {
         schemas: {
@@ -679,23 +679,41 @@ const documentacao = {
                     email: { type: "string", example: "ricardo@email.com" }
                 }
             },
+            Listar_Categorias:{
+                type: 'object',
+                properties: {
+                    id_categoria: {type: "integer", example: 1},
+                    nome: {type: "string", example: "Eletrônicos"},
+                    descricao: {type: "string", example: "Produtos eletrônicos"},
+                    cor: {type: "string", example: "#FF0000"},
+                    icone: {type: "string", example: "caminhodoicone"},
+                    tipo: {type: "string", example: "E"}
+                }
+            },
+             Listar_Subcategorias:{
+                type: 'object',
+                properties: {
+                    id_subcategoria: {type: "integer", example: 1},
+                    nome: {type: "string", example: "Smartphones"},
+                    ativo: {type: "boolean", example: true},
+                    id_categoria: {type: "integer", example: 1}
+                }
+            },
             Cadastrar_Usuario: {
                 type: 'object',
                 properties: {
-                    nome: { type: "string", example: "Ricardo" },
-                    email: { type: "string", example: "ricardo2@email.com" },
-                    senha: { type: "string", example: "Senha123" },
-                    tipo_acesso: { type: "string", example: "Administrador" }
+                    nome: {type: "string", example: "Ricardo"},
+                    email: {type: "string", example: "ricardo2@email.com"},
+                    senha: {type: "string", example: "Senha123"}
                 }
             },
             Atualizar_Usuario: {
                 type: 'object',
                 required: ["nome", "email", "senha"],
                 properties: {
-                    nome: { type: "string", example: "Nina" },
-                    email: { type: "string", example: "nina@email.com" },
-                    senha: { type: "string", example: "Senha123" },
-                    tipo_acesso: { type: "string", example: "Administrador" }
+                    nome: {type: "string", example: "Nina"},
+                    email: {type: "string", example: "nina@email.com"},
+                    senha: {type: "string", example: "Senha123"}
                 }
             },
             Listar_Categorias: {
